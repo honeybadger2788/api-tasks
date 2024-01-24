@@ -23,4 +23,9 @@ public class TaskController {
     public ResponseEntity<List<Task>> getTasks() {
         return ResponseEntity.ok(taskService.listTasks());
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<Task> updateTask(@RequestBody Task task) {
+        return ResponseEntity.ok(taskService.update(task));
+    }
 }
