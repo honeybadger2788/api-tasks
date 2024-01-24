@@ -8,4 +8,5 @@ public interface ITaskService {
     Task create(Task task);
     List<Task> listTasks();
     Task update(Task task);
+    void delete(Long id);
 }
