@@ -3,13 +3,14 @@ package com.noeliacarosella.apitask.controller;
 import com.noeliacarosella.apitask.model.Task;
 import com.noeliacarosella.apitask.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("tasks")
+@RequestMapping("/tasks")
 public class TaskController {
 
     @Autowired
@@ -27,5 +28,11 @@ public class TaskController {
     @PutMapping("/update")
     public ResponseEntity<Task> updateTask(@RequestBody Task task) {
         return ResponseEntity.ok(taskService.update(task));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteTask(@PathVariable Long id) {
+        taskService.delete(id);
+        return new ResponseEntity<>("Task deleted", HttpStatus.ACCEPTED);
     }
 }
