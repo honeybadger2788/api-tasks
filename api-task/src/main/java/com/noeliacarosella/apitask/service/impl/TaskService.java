@@ -28,4 +28,9 @@ public class TaskService implements ITaskService {
     public Task update(Task task) {
         return taskRepository.save(task);
     }
+
+    @Override
+    public void delete(Long id) {
+        taskRepository.deleteById(id);
+    }
 }
