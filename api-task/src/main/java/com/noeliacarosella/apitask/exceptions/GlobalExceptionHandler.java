@@ -16,4 +16,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity notFoundError(ResourceNotFoundException ex){
         return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity badRequest(BadRequestException ex){
+        return new ResponseEntity(ex.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 }
