@@ -4,10 +4,9 @@ import com.noeliacarosella.apitask.model.Task;
 import com.noeliacarosella.apitask.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("tasks")
@@ -18,5 +17,10 @@ public class TaskController {
     @PostMapping("/add")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
         return ResponseEntity.ok(taskService.create(task));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Task>> getTasks() {
+        return ResponseEntity.ok(taskService.listTasks());
     }
 }
