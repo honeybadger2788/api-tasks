@@ -11,4 +11,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity allError(Exception ex, WebRequest req) {
         return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity notFoundError(ResourceNotFoundException ex){
+        return new ResponseEntity(ex.getMessage(),HttpStatus.NOT_FOUND);
+    }
 }
