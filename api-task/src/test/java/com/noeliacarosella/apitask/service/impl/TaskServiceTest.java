@@ -1,5 +1,6 @@
 package com.noeliacarosella.apitask.service.impl;
 
+import com.noeliacarosella.apitask.exceptions.ResourceNotFoundException;
 import com.noeliacarosella.apitask.model.Task;
 import com.noeliacarosella.apitask.repository.TaskRepository;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -49,6 +51,17 @@ class TaskServiceTest {
         Task result = taskService.create(newTask);
 
         Assertions.assertEquals(newTask, result);
+    }
+
+    @Test
+    public void testUpdateTask() throws ResourceNotFoundException {
+        Task existingTask = dummyTasks.get(0);
+        when(taskRepository.findById(existingTask.getId())).thenReturn(Optional.of(existingTask));
+        when(taskRepository.save(existingTask)).thenReturn(existingTask);
+
+        Task updatedTask = taskService.update(existingTask);
+
+        Assertions.assertEquals(existingTask, updatedTask);
     }
 
 }
