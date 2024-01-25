@@ -19,7 +19,7 @@ public class TaskController {
     ITaskService taskService;
     @PostMapping("/add")
     public ResponseEntity<Task> postTask(@Valid @RequestBody Task task) {
-        return ResponseEntity.ok(taskService.create(task));
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.create(task));
     }
 
     @GetMapping()
@@ -29,7 +29,7 @@ public class TaskController {
 
     @PutMapping("/update")
     public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) throws ResourceNotFoundException {
-        return ResponseEntity.ok(taskService.update(task));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(taskService.update(task));
     }
 
     @DeleteMapping("/delete/{id}")

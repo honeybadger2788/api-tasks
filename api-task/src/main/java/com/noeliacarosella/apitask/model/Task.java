@@ -1,7 +1,5 @@
 package com.noeliacarosella.apitask.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -16,6 +14,7 @@ public class Task {
     private String title;
     @NotBlank(message = "La descripción no puede estar vacía")
     private String description;
+    private Boolean isComplete = false;
 
     public Task() {
     }
@@ -43,5 +42,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(Boolean complete) {
+        isComplete = complete;
     }
 }
