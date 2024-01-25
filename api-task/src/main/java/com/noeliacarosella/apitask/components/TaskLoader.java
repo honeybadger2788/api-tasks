@@ -16,10 +16,6 @@ public class TaskLoader implements ApplicationRunner {
     @Autowired
     TaskRepository taskRepository;
 
-    public void DataLoader(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
-
     private void loadDummyData() {
         List<Task> dummyTasks = Arrays.asList(
                 new Task("Task 1", "Description 1"),
