@@ -83,4 +83,11 @@ class TaskServiceTest {
 
         verify(taskRepository, times(1)).deleteById(existingTask.getId());
     }
+
+    @Test
+    public void testDeleteTaskNotFound() {
+        when(taskRepository.findById(100L)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> taskService.delete(100L));
+    }
 }
