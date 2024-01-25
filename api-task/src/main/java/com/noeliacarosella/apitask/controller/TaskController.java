@@ -1,5 +1,6 @@
 package com.noeliacarosella.apitask.controller;
 
+import com.noeliacarosella.apitask.exceptions.ResourceNotFoundException;
 import com.noeliacarosella.apitask.model.Task;
 import com.noeliacarosella.apitask.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping(value = "/tasks")
 public class TaskController {
 
     @Autowired
@@ -26,13 +27,13 @@ public class TaskController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Task> updateTask(@RequestBody Task task) {
+    public ResponseEntity<Task> updateTask(@RequestBody Task task) throws ResourceNotFoundException {
         return ResponseEntity.ok(taskService.update(task));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteTask(@PathVariable Long id) {
+    public ResponseEntity<String> deleteTask(@PathVariable Long id) throws ResourceNotFoundException {
         taskService.delete(id);
-        return new ResponseEntity<>("Task deleted", HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Task deleted");
     }
 }
