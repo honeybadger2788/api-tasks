@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class TaskServiceTest {
@@ -72,5 +72,15 @@ class TaskServiceTest {
 
         Task nonExistingTask = new Task("Non-existing Task", "Non-existing Description");
         assertThrows(ResourceNotFoundException.class, () -> taskService.update(nonExistingTask));
+    }
+
+    @Test
+    public void testDeleteTask() throws ResourceNotFoundException {
+        Task existingTask = dummyTasks.get(0);
+        when(taskRepository.findById(existingTask.getId())).thenReturn(Optional.of(existingTask));
+
+        taskService.delete(existingTask.getId());
+
+        verify(taskRepository, times(1)).deleteById(existingTask.getId());
     }
 }
