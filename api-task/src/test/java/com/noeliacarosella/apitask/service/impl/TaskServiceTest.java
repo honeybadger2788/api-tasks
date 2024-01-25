@@ -2,13 +2,17 @@ package com.noeliacarosella.apitask.service.impl;
 
 import com.noeliacarosella.apitask.model.Task;
 import com.noeliacarosella.apitask.repository.TaskRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class TaskServiceTest {
@@ -26,5 +30,14 @@ class TaskServiceTest {
         dummyTasks.add(new Task("Test Task 1", "Description 1"));
         dummyTasks.add(new Task("Test Task 2", "Description 2"));
         dummyTasks.add(new Task("Test Task 3", "Description 3"));
+    }
+
+    @Test
+    public void testListTasks() {
+        when(taskRepository.findAll()).thenReturn(dummyTasks);
+
+        List<Task> result = taskService.listTasks();
+
+        Assertions.assertEquals(dummyTasks, result);
     }
 }
