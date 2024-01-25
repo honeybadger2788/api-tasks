@@ -3,6 +3,7 @@ package com.noeliacarosella.apitask.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -11,9 +12,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotBlank(message = "El título no puede estar vacío")
     private String title;
-    @NotNull
+    @NotBlank(message = "La descripción no puede estar vacía")
     private String description;
 
     public Task() {
