@@ -1,10 +1,8 @@
 package com.noeliacarosella.apitask.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -13,7 +11,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String title;
+    @NotNull
     private String description;
 
     public Task() {
