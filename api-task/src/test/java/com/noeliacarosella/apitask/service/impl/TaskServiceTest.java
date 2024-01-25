@@ -40,4 +40,15 @@ class TaskServiceTest {
 
         Assertions.assertEquals(dummyTasks, result);
     }
+
+    @Test
+    public void testCreateTask() {
+        Task newTask = new Task("New Task", "New Description");
+        when(taskRepository.save(newTask)).thenReturn(newTask);
+
+        Task result = taskService.create(newTask);
+
+        Assertions.assertEquals(newTask, result);
+    }
+
 }
