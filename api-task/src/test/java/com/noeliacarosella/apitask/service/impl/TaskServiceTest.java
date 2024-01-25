@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -64,4 +65,12 @@ class TaskServiceTest {
         Assertions.assertEquals(existingTask, updatedTask);
     }
 
+    @Test
+    public void testUpdateTaskNotFound() {
+        Long nonExistingTaskId = 100L;
+        when(taskRepository.findById(nonExistingTaskId)).thenReturn(Optional.empty());
+
+        Task nonExistingTask = new Task("Non-existing Task", "Non-existing Description");
+        assertThrows(ResourceNotFoundException.class, () -> taskService.update(nonExistingTask));
+    }
 }
