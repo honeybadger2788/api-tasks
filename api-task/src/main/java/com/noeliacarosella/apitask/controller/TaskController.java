@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class TaskController {
     @Autowired
     ITaskService taskService;
     @PostMapping("/add")
-    public ResponseEntity<Task> postTask(@RequestBody Task task) {
+    public ResponseEntity<Task> postTask(@Valid @RequestBody Task task) {
         return ResponseEntity.ok(taskService.create(task));
     }
 
@@ -27,7 +28,7 @@ public class TaskController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Task> updateTask(@RequestBody Task task) throws ResourceNotFoundException {
+    public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) throws ResourceNotFoundException {
         return ResponseEntity.ok(taskService.update(task));
     }
 
