@@ -12,7 +12,6 @@ This repository contains the source code for the API Tasks project. The API Task
   - [Configuration](#configuration)
 - [Usage](#usage)
   - [Endpoints](#endpoints)
-  - [Authentication](#authentication)
 - [Testing](#testing)
 
 ## Getting Started
@@ -52,10 +51,6 @@ This repository contains the source code for the API Tasks project. The API Task
 - **GET /tasks**: Retrieve a list of all tasks.
 - **PUT /tasks/update**: Update an existing task.
 - **DELETE /tasks/delete/{id}**: Delete a task by ID.
-
-### Authentication
-
-Authentication details, if applicable, should be provided here.
 
 ## Testing
 
